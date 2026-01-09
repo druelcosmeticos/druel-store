@@ -18,7 +18,6 @@
       --line: #e6d7cf;
       --success: #25D366; /* WhatsApp */
     }
-	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     * { box-sizing: border-box; }
     body {
       margin: 0; background: var(--bg); color: var(--ink);
@@ -186,7 +185,30 @@
   object-fit: cover;   /* preenche o espaço sem distorcer */
   border-radius: 12px; /* opcional: cantos arredondados */
 }
-	  
+.container {
+  width: 100%;   /* ocupa toda a largura */
+  padding: 2rem; /* espaçamento proporcional */
+}
+/* Estilo padrão (desktop) */
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Telefones */
+@media (max-width: 600px) {
+  .products {
+    grid-template-columns: 1fr;
+  }
+}
   </style>
 </head>
 <body>
@@ -206,6 +228,7 @@
     <div class="cta">
       <a class="btn btn-whatsapp" id="btnTopWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
       <button class="btn btn-cart" onclick="scrollToCart()">Ver carrinho</button>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </div>
   </header>
 
@@ -370,9 +393,9 @@
       const msg = encodeURIComponent(
         `Olá, Druel! Gostaria de finalizar a compra: ${itemsText} | Total: ${total.toLocaleString('pt-PT')} Kz.`
       );
-      const link = `https://wa.me/${244940645404}?text=${msg}`;
+      const link = `https://wa.me/${940645404}?text=${msg}`;
       document.getElementById("checkoutBtn").href = link;
-      document.getElementById("btnTopWhatsapp").href = `https://wa.me/${244940645404}`;
+      document.getElementById("btnTopWhatsapp").href = `https://wa.me/${940645404}`;
     }
 
     function scrollToCart() {
@@ -396,6 +419,4 @@
     renderCart();
   </script>
 </body>
-
 </html>
-
