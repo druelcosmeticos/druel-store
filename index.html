@@ -209,6 +209,75 @@
     grid-template-columns: 1fr;
   }
 }
+.open-cart-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #d4a373;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 50px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+  z-index: 100;
+}
+
+.cart-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 100%;
+  background: #fff8f6;
+  box-shadow: -4px 0 12px rgba(0,0,0,.1);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.cart-panel.open {
+  transform: translateX(0);
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 1rem;
+}
+
+.cart-footer {
+  border-top: 1px solid #e0cfcf;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.clear-btn {
+  background: #f0e0d6;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
   </style>
 </head>
 <body>
@@ -245,6 +314,22 @@
         <button class="chip" onclick="filterCategory('Acessórios')">Acessórios</button>
       </div>
     </div>
+	<!-- Botão flutuante para abrir o carrinho -->
+<button class="open-cart-btn" onclick="toggleCartPanel()">🛒 Ver Carrinho</button>
+
+<!-- Painel lateral do carrinho -->
+<div id="cartPanel" class="cart-panel">
+  <div class="cart-header">
+    <h2>🛍️ Carrinho</h2>
+    <button class="close-btn" onclick="toggleCartPanel()">×</button>
+  </div>
+  <div id="cartItemsPanel" class="cart-items"></div>
+  <div class="cart-footer">
+    <p><strong>Total:</strong> <span id="cartTotalPanel">0</span> Kz</p>
+    <a class="btn-whatsapp" id="checkoutPanelBtn" href="#" target="_blank">Finalizar pelo WhatsApp</a>
+    <button class="clear-btn" onclick="clearCart()">Limpar</button>
+  </div>
+</div>
     <div class="visual">
       <div class="hero-img">
         <!-- Imagem sugestiva (substituir por banner oficial da Druel) -->
@@ -417,6 +502,24 @@
     // Inicialização
     renderProducts();
     renderCart();
+	function toggleCartPanel() {
+  document.getElementById("cartPanel").classList.toggle("open");
+}
+
+function renderCartPanel() {
+  const wrap = document.getElementById("cartItemsPanel");
+  wrap.innerHTML = "";
+  let total = 0;
+  state.cart.forEach(c => {
+    total += c.price * c.qty;
+    const item = document.createElement("div");
+    item.innerHTML = `${c.name} × ${c.qty} — <strong>${(c.price * c.qty).toLocaleString('pt-PT')} Kz</strong>`;
+    wrap.appendChild(item);
+  });
+  document.getElementById("cartTotalPanel").textContent = total.toLocaleString('pt-PT');
+  const msg = encodeURIComponent("Olá, Druel! Gostaria de finalizar a compra: " + state.cart.map(c => `${c.name} x${c.qty}`).join(", ") + ` | Total: ${total.toLocaleString('pt-PT')} Kz`);
+  document.getElementById("checkoutPanelBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+}
   </script>
 </body>
 </html>
