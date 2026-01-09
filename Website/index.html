@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Druel Cosméticos — Beleza que revela sua luz</title>
+  <meta name="description" content="Druel Cosméticos — e-commerce premium com atendimento via WhatsApp. Centralidade do Kilamba, Luanda - Angola.">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fff8f6;
+      --card: #ffffff;
+      --ink: #3e2f2b;
+      --muted: #7a5e58;
+      --accent: #d4a373; /* dourado suave */
+      --accent-2: #f0e0d6; /* areia rosé */
+      --line: #e6d7cf;
+      --success: #25D366; /* WhatsApp */
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    }
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: #fff; border-bottom: 1px solid var(--line);
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 0.75rem 1rem;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .logo {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #d9a97c 0%, #c09064 40%, #8a5a3a 100%);
+      position: relative; box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    .logo::after { /* folha estilizada */
+      content: ""; position: absolute; left: 12px; top: 10px; width: 18px; height: 18px;
+      border-radius: 50% 60% 50% 60% / 60% 50% 60% 50%;
+      background: #fff8f6; opacity: .9; transform: rotate(-25deg);
+    }
+    .brand h1 {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700;
+      font-size: 1.25rem; letter-spacing: .02em; margin: 0;
+    }
+    nav {
+      display: flex; gap: 1rem; justify-content: center;
+    }
+    nav a {
+      color: var(--ink); text-decoration: none; font-weight: 600; font-size: .95rem;
+      padding: .4rem .6rem; border-radius: 6px;
+    }
+    nav a:hover { background: var(--accent-2); }
+    .cta {
+      display: flex; justify-content: flex-end; gap: .5rem; align-items: center;
+    }
+    .btn {
+      border: 0; border-radius: 8px; padding: .55rem .9rem; font-weight: 700; cursor: pointer;
+    }
+    .btn-whatsapp {
+      background: var(--success); color: #fff; display: inline-flex; align-items: center; gap: .5rem;
+    }
+    .btn-cart {
+      background: var(--accent); color: #fff;
+    }
+    /* Hero */
+    .hero {
+      display: grid; grid-template-columns: 1.2fr .8fr; gap: 2rem; align-items: center;
+      padding: 1.25rem 1rem 0;
+    }
+    .hero .copy {
+      padding: 2rem 1rem;
+    }
+    .tagline {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      font-weight: 700; line-height: 1.15;
+    }
+    .sub {
+      color: var(--muted); font-size: 1rem; margin-top: .5rem;
+    }
+    .hero .visual {
+      position: relative; min-height: 220px; border-radius: 18px; overflow: hidden;
+      background:
+        radial-gradient(120% 140% at 80% 20%, rgba(212,163,115,.25) 0%, rgba(212,163,115,0) 60%),
+        linear-gradient(180deg, #fff, #fff3ef);
+      box-shadow: 0 10px 30px rgba(0,0,0,.06);
+    }
+    .visual::after { /* ramos de lavanda decorativos */
+      content: ""; position: absolute; right: -20px; bottom: -20px; width: 180px; height: 180px;
+      background: radial-gradient(closest-side, #c9b6d8 0%, #d7c9e6 40%, transparent 70%);
+      filter: blur(12px); opacity: .7;
+    }
+    .hero-img {
+      position: absolute; inset: 0; display: grid; place-items: center; padding: 1rem;
+    }
+    .hero-img img {
+      max-width: 86%; border-radius: 16px;
+      box-shadow: 0 14px 36px rgba(0,0,0,.08);
+    }
+
+    /* Grid de produtos */
+    .section {
+      padding: 2rem 1rem;
+    }
+    .section h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; margin: 0 0 1rem 0;
+    }
+    .filters {
+      display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1rem;
+    }
+    .chip {
+      background: #fff; border: 1px solid var(--line); border-radius: 999px;
+      padding: .4rem .75rem; font-size: .9rem; cursor: pointer;
+    }
+    .products {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
+    }
+    @media (max-width: 1100px) { .products { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 780px)  { .hero { grid-template-columns: 1fr; } .products { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px)  { .products { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+      display: grid; grid-template-rows: auto 1fr auto; box-shadow: 0 4px 14px rgba(0,0,0,.06);
+    }
+    .card-media {
+      aspect-ratio: 1/1; background: #f7eee9; display: grid; place-items: center;
+    }
+    .card-media img {
+      width: 88%; height: auto; object-fit: cover; border-radius: 12px;
+    }
+    .card-body { padding: .9rem; }
+    .card-title { font-weight: 700; font-size: 1rem; margin-bottom: .35rem; }
+    .card-sub { color: var(--muted); font-size: .9rem; }
+    .price { font-weight: 700; margin-top: .6rem; }
+    .card-actions {
+      display: flex; gap: .5rem; padding: .9rem; border-top: 1px solid var(--line);
+    }
+    .btn-ghost {
+      background: var(--accent-2); color: var(--ink);
+    }
+
+    /* Carrinho */
+    .cart {
+      background: #fff0ea; border-top: 1px solid var(--line); padding: 1.5rem 1rem;
+      position: sticky; bottom: 0; z-index: 40;
+    }
+    .cart-inner {
+      max-width: 1100px; margin: 0 auto; display: grid; gap: 1rem;
+      grid-template-columns: 1fr auto;
+    }
+    .cart-list {
+      display: flex; flex-wrap: wrap; gap: .5rem;
+    }
+    .cart-pill {
+      background: #fff; border: 1px solid var(--line); border-radius: 999px;
+      padding: .4rem .7rem; display: inline-flex; gap: .5rem; align-items: center;
+    }
+    .cart-total { text-align: right; }
+    .cart-actions { display: flex; gap: .5rem; justify-content: flex-end; }
+    .remove {
+      background: transparent; border: 0; color: #b25a4c; font-weight: 700; cursor: pointer;
+    }
+
+    /* Rodapé */
+    footer {
+      background: #fff; border-top: 1px solid var(--line); padding: 2rem 1rem; margin-top: 2rem;
+    }
+    .foot {
+      max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+    }
+    @media (max-width: 780px) { .foot { grid-template-columns: 1fr; } }
+    .foot h4 { margin: 0 0 .5rem 0; font-family: 'Cormorant Garamond', serif; }
+    .muted { color: var(--muted); }
+    .ssl { display: inline-flex; align-items: center; gap: .5rem; }
+	img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1; /* força proporção quadrada */
+  object-fit: cover;   /* preenche o espaço sem distorcer */
+  border-radius: 12px; /* opcional: cantos arredondados */
+}
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <h1>DRUEL COSMÉTICOS</h1>
+    </div>
+    <nav aria-label="Navegação principal">
+      <a href="#home">Home</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#carrinho">Carrinho</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="cta">
+      <a class="btn btn-whatsapp" id="btnTopWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+      <button class="btn btn-cart" onclick="scrollToCart()">Ver carrinho</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="hero" aria-label="Apresentação">
+    <div class="copy">
+      <div class="tagline">Beleza que revela sua luz.</div>
+      <p class="sub">Cosméticos naturais e sofisticados, pensados para quem valoriza o essencial com classe. Centralidade do Kilamba, Luanda – Angola.</p>
+      <div class="filters" aria-label="Categorias">
+        <button class="chip" onclick="filterCategory('Todos')">Todos</button>
+        <button class="chip" onclick="filterCategory('Rosto')">Rosto</button>
+        <button class="chip" onclick="filterCategory('Corpo')">Corpo</button>
+        <button class="chip" onclick="filterCategory('Perfumaria')">Perfumaria</button>
+        <button class="chip" onclick="filterCategory('Acessórios')">Acessórios</button>
+      </div>
+    </div>
+    <div class="visual">
+      <div class="hero-img">
+        <!-- Imagem sugestiva (substituir por banner oficial da Druel) -->
+        <img src="imagens/logo.jpg" alt="Skincare premium com toque de lavanda">
+      </div>
+    </div>
+  </section>
+
+  <!-- Produtos -->
+  <section id="produtos" class="section" aria-label="Vitrine de produtos">
+    <h2>Seleção premium</h2>
+    <div class="products" id="productGrid"></div>
+  </section>
+
+  <!-- Carrinho fixo -->
+  <section id="carrinho" class="cart" aria-label="Carrinho">
+    <div class="cart-inner">
+      <div>
+        <strong>Itens:</strong>
+        <div id="cartList" class="cart-list"></div>
+      </div>
+      <div class="cart-total">
+        <div><strong>Total:</strong> <span id="cartTotal">0</span> Kz</div>
+        <div class="cart-actions">
+          <button class="remove" onclick="clearCart()">Limpar</button>
+          <a class="btn btn-whatsapp" id="checkoutBtn" href="#" target="_blank" rel="noopener">Finalizar pelo WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer id="contacto">
+    <div class="foot">
+      <div>
+        <h4>Localização</h4>
+        <p>Centralidade do Kilamba, Luanda – Angola</p>
+        <p class="muted">Atendimento personalizado via WhatsApp.</p>
+      </div>
+      <div>
+        <h4>Redes</h4>
+        <p>Instagram: <strong>@druelcosmeticos</strong></p>
+        <p class="muted">Siga para novidades, lançamentos e dicas de rotina.</p>
+      </div>
+      <div>
+        <h4>Segurança</h4>
+        <p class="ssl">🔒 <span>Site seguro, com padrões de criptografia modernos.</span></p>
+        <p class="muted">Compras finalizadas por canal oficial da Druel no WhatsApp.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // CONFIGURAÇÃO: substitua pelo número oficial da Druel (ex.: +244 923 000 000)
+    const WHATSAPP_NUMBER = "244923000000";
+
+    // Catálogo
+    const PRODUCTS = [
+      { id: "serum", name: "Sérum Facial Revitalizante", price: 8500, cat: "Rosto", img: "imagens/Serum-Facial-Revitalizante.jpg", desc: "Ilumina e revitaliza a pele com ativos naturais." },
+      { id: "creme-lavanda", name: "Creme Hidratante com Extrato de Lavanda", price: 7800, cat: "Rosto", img: "imagens/Creme-Hidratante-com-Extrato-de-Lavanda.jpg", desc: "Hidratação profunda e toque aromático calmante." },
+      { id: "mask-calm", name: "Máscara Facial Calmante", price: 6900, cat: "Rosto", img: "imagens/Máscara-Facial-Calmante.jpg", desc: "Reduz vermelhidão e acalma a pele sensível." },
+      { id: "oleo-corporal", name: "Óleo Corporal Nutritivo", price: 9200, cat: "Corpo", img: "imagens/Óleo-Corporal-Nutritivo.jpg", desc: "Nutrição intensa com acabamento sedoso." },
+      { id: "locao-tonic", name: "Loção Tonificante para o Rosto", price: 6300, cat: "Rosto", img: "imagens/Loção-Tonificante-para-o-Rosto.jpg", desc: "Equilíbrio da pele com sensação de frescor." },
+      { id: "perfumes", name: "Perfumes", price: 11000, cat: "Perfumaria", img: "imagens/perfumes.jpg", desc: "Assinaturas olfativas que elevam sua presença." },
+      { id: "agua-colonia", name: "Água de Colónia", price: 5400, cat: "Perfumaria", img: "imagens/Agua-de-colonia.jpg", desc: "Leve, fresca e ideal para o dia a dia." },
+      { id: "esfoliante", name: "Esfoliante", price: 6400, cat: "Rosto", img: "imagens/esfoliante.jpg", desc: "Textura suave que renova e ilumina a pele." },
+      { id: "desodorizante", name: "Desodorizante", price: 4800, cat: "Corpo", img: "imagens/Desodorizante.jpg", desc: "Desfrute da leveza." },
+      { id: "makeup-acessorios", name: "Acessórios de Makeup", price: 5200, cat: "Acessórios", img: "imagens/Acessórios-de-Makeup.jpg", desc: "Pincéis, esponjas e organizadores premium." },
+      { id: "unhas-pes", name: "Acessórios para Unhas e Tratamento dos Pés", price: 5600, cat: "Acessórios", img: "imagens/Acessórios-para-Unhas-e-Tratamento-dos-Pés.jpg", desc: "Kits completos para cuidado impecável." }
+      // “e muitos outros” podem ser adicionados mantendo este formato
+    ];
+
+    // Estado
+    const state = { cart: [], filter: "Todos" };
+
+    // Render de produtos
+    function renderProducts() {
+      const grid = document.getElementById("productGrid");
+      grid.innerHTML = "";
+      const items = PRODUCTS.filter(p => state.filter === "Todos" || p.cat === state.filter);
+      items.forEach(p => grid.appendChild(productCard(p)));
+    }
+
+    // Card de produto
+    function productCard(p) {
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="card-media">
+          <img src="${p.img}" alt="${p.name}">
+        </div>
+        <div class="card-body">
+          <div class="card-title">${p.name}</div>
+          <div class="card-sub">${p.desc}</div>
+          <div class="price">${p.price.toLocaleString('pt-PT')} Kz</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-cart" aria-label="Adicionar ao carrinho" onclick="addToCart('${p.id}')">Adicionar ao carrinho</button>
+          <button class="btn btn-ghost" onclick="showSimilar('${p.cat}')">Ver similares</button>
+        </div>
+      `;
+      return card;
+    }
+
+    // Carrinho
+    function addToCart(id) {
+      const item = PRODUCTS.find(p => p.id === id);
+      if (!item) return;
+      const existing = state.cart.find(c => c.id === id);
+      if (existing) existing.qty += 1;
+      else state.cart.push({ id: item.id, name: item.name, price: item.price, qty: 1 });
+      renderCart();
+    }
+
+    function removeFromCart(id) {
+      state.cart = state.cart.filter(c => c.id !== id);
+      renderCart();
+    }
+
+    function clearCart() {
+      state.cart = [];
+      renderCart();
+    }
+
+    function renderCart() {
+      const wrap = document.getElementById("cartList");
+      wrap.innerHTML = "";
+      let total = 0;
+      state.cart.forEach(c => {
+        total += c.price * c.qty;
+        const pill = document.createElement("span");
+        pill.className = "cart-pill";
+        pill.innerHTML = `
+          ${c.name} × ${c.qty} — <strong>${(c.price * c.qty).toLocaleString('pt-PT')} Kz</strong>
+          <button class="remove" title="Remover" onclick="removeFromCart('${c.id}')">×</button>
+        `;
+        wrap.appendChild(pill);
+      });
+      document.getElementById("cartTotal").textContent = total.toLocaleString('pt-PT');
+      updateWhatsApp(total);
+    }
+
+    // WhatsApp
+    function updateWhatsApp(total) {
+      const itemsText = state.cart.map(c => `${c.name} x${c.qty}`).join(", ");
+      const msg = encodeURIComponent(
+        `Olá, Druel! Gostaria de finalizar a compra: ${itemsText} | Total: ${total.toLocaleString('pt-PT')} Kz.`
+      );
+      const link = `https://wa.me/${940645404}?text=${msg}`;
+      document.getElementById("checkoutBtn").href = link;
+      document.getElementById("btnTopWhatsapp").href = `https://wa.me/${940645404}`;
+    }
+
+    function scrollToCart() {
+      document.getElementById("carrinho").scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Filtro de categoria
+    function filterCategory(cat) {
+      state.filter = cat;
+      renderProducts();
+      // Feedback visual opcional pode ser adicionado às chips
+    }
+
+    function showSimilar(cat) {
+      filterCategory(cat);
+      window.scrollTo({ top: document.getElementById("produtos").offsetTop - 80, behavior: "smooth" });
+    }
+
+    // Inicialização
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
