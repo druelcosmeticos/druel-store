@@ -33,19 +33,3 @@ A **Druel Cosméticos** é uma marca que valoriza a beleza natural, o cuidado es
 
 **Centralidade do Kilamba – Luanda, Angola**  
 Instagram: [@druelcosmeticos](https://www.instagram.com/druelcosmeticos)
-
----
-
-## 🚀 Publicação
-
-Este projeto pode ser publicado via **GitHub Pages** ou integrado a servidores institucionais.  
-Para publicar com GitHub Pages:
-
-1. Vá em **Settings** → **Pages**  
-2. Selecione a branch `main` e pasta `/root`  
-3. O site será acessível em:  
-   `https://teuuser.github.io/druel-store/`
-
----
-
-## 📦 Estrutura do projeto
